@@ -1,5 +1,9 @@
-import React from "react";
+import React from 'react';
 
-export default function LocationCard({ name, type, dimension, residents }) {
-  return <span>todo: location</span>;
+export default function LocationCard(
+	props,
+	{ name, type, dimension, residents }
+) {
+	console.log(props);
+	return <span>todo: location</span>;
 }

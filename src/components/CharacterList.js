@@ -2,8 +2,17 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchForm from './SearchForm';
 import CharacterCard from './CharacterCard';
+import styled from 'styled-components';
 
 export default function CharacterList() {
+	const Ul = styled.ul`
+		list-style: none;
+	`;
+
+	const Li = styled.li`
+		padding: 10px;
+	`;
+
 	const [characters, setCharacters] = useState([]);
 	const [result, setResult] = useState([]);
 
@@ -21,12 +30,7 @@ export default function CharacterList() {
 
 		getCharacter();
 	}, []);
-
-	// useEffect(() => {
-	// 	// TODO: Add API Request here - must run in `useEffect`
-	// 	//  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-	// }, []);
-
+	console.log('characters', characters);
 	return (
 		<div>
 			<SearchForm
@@ -36,9 +40,23 @@ export default function CharacterList() {
 				setResult={setResult}
 			/>
 			<section className="character-list">
-				<ul>
-					<CharacterCard characters={characters} result={result} />
-				</ul>
+				<Ul>
+					{result.length > 0
+						? result.map(character => {
+								return (
+									<Li>
+										<CharacterCard character={character} />
+									</Li>
+								);
+						  })
+						: characters.map(character => {
+								return (
+									<Li>
+										<CharacterCard character={character} />
+									</Li>
+								);
+						  })}
+				</Ul>
 			</section>
 		</div>
 	);

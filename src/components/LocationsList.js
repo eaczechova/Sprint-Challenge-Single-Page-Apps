@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 
 export default function LocationsList(props) {
-	console.log('LocationsList', props.location);
+	const Div = styled.div``;
+	const Paras = styled.div``;
 
-	return <p>{props.location.name}</p>;
+	console.log(props.location.url);
+	return (
+		<Div>
+			<Paras>{props.location.name}</Paras>
+		</Div>
+	);
 }

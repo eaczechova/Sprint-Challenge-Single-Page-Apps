@@ -16,7 +16,7 @@ export default function App() {
 		list-style: none;
 	`;
 
-	const LI = styled.li`
+	const Li = styled.li`
 		padding: 18px;
 	`;
 
@@ -24,17 +24,17 @@ export default function App() {
 		<Main>
 			<Nav>
 				<Ul>
-					<LI>
+					<Li>
 						<Link to="/">Home</Link>
-					</LI>
-					<LI>
+					</Li>
+					<Li>
 						<Link to="/list">Charcaters</Link>
-					</LI>
+					</Li>
 				</Ul>
 			</Nav>
 			<Header />
 			<Route exact path="/" component={WelcomePage} />
-			<Route path="/list" component={CharacterList} />
+			<Route exact path="/list" component={CharacterList} />
 		</Main>
 	);
 }
