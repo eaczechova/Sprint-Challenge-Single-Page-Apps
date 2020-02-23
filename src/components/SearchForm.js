@@ -9,8 +9,13 @@ export default function SearchForm(props) {
 	// 	height: 50px;
 	// `;
 
+	const Section = styled.section`
+		display: flex;
+		justify-content: space-around;
+	`;
+
 	const Button = styled.button`
-		background: rgb(227, 219, 169);
+		background: rgb(155, 201, 228);
 		font-size: 14px;
 		height: 30px;
 		padding: 0 20px;
@@ -20,6 +25,19 @@ export default function SearchForm(props) {
 		border: none;
 		cursor: pointer;
 	`;
+
+	// const Label = styled.label`
+	// 	font-weight: 700;
+	// 	padding: 0 20px;
+	// `;
+
+	// const Input = styled.input`
+	// 	margin: 0 20px;
+	// 	height: 20px;
+	// 	border: none;
+	// 	border-bottom: 2px solid lightgray;
+	// 	display: inline-block;
+	// `;
 
 	const [inputValue, setInputValue] = useState('');
 	const [searchValue, setSearchValue] = useState('');
@@ -31,6 +49,7 @@ export default function SearchForm(props) {
 	const handleSubmit = event => {
 		event.preventDefault();
 		setSearchValue(inputValue);
+		setInputValue('');
 	};
 
 	const searchResult = props.characters.filter(character => {
@@ -46,7 +65,12 @@ export default function SearchForm(props) {
 			<form onSubmit={event => handleSubmit(event)}>
 				<label>
 					Search charcter by name:
-					<input type="text" onChange={changeHandler} />
+					<input
+						type="text"
+						name="name"
+						onChange={changeHandler}
+						value={inputValue}
+					/>
 				</label>
 				<Button>Search</Button>
 			</form>

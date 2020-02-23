@@ -10,6 +10,24 @@ export default function App() {
 	const Nav = styled.nav`
 		width: 100%;
 	`;
+	const StyledLink = styled(Link)`
+		color: inherit;
+		display: inline-block;
+		text-decoration: none;
+		border-bottom: 3px solid rgb(155, 201, 228);
+		font-size: 14px;
+		margin-top: 10px;
+		padding: 10px;
+		width: 100px;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: all 1s;
+		text-align: center;
+
+		&:hover {
+			background: rgb(155, 201, 228);
+		}
+	`;
 	const Ul = styled.ul`
 		display: flex;
 		justify-content: center;
@@ -25,16 +43,16 @@ export default function App() {
 			<Nav>
 				<Ul>
 					<Li>
-						<Link to="/">Home</Link>
+						<StyledLink to="/">Home</StyledLink>
 					</Li>
 					<Li>
-						<Link to="/list">Charcaters</Link>
+						<StyledLink to="/list">Charcaters</StyledLink>
 					</Li>
 				</Ul>
 			</Nav>
 			<Header />
 			<Route exact path="/" component={WelcomePage} />
-			<Route exact path="/list" component={CharacterList} />
+			<Route path="/list" component={CharacterList} />
 		</Main>
 	);
 }
