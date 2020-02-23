@@ -7,9 +7,9 @@ export default function CharacterCard(props) {
 	const Card = styled.div`
 		display: flex;
 		font-size: 14px;
-    	height: 400px;
-    	width: 50%
-		padding: 0 20px;
+    	height: 420px;
+    	width: 60%
+		padding: 20px;
 		border-radius: 5px;
     	border: 1px solid lightgray;
     	box-shadow: 0 0 1em lightgray;
