@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import LocationsList from './LocationsList';
-import { Route, Link } from 'react-router-dom';
+import EpisodesList from './EpisodesList';
+import { Route, NavLink } from 'react-router-dom';
 
 export default function CharacterCard(props) {
 	const Card = styled.div`
@@ -13,7 +14,8 @@ export default function CharacterCard(props) {
 		border-radius: 5px;
     	border: 1px solid lightgray;
     	box-shadow: 0 0 1em lightgray;
-    	margin: 20px auto;
+		margin: 20px auto;
+		overflow: scroll;
   `;
 
 	const Heading2 = styled.h2`
@@ -50,13 +52,14 @@ export default function CharacterCard(props) {
 		font-weight: 700;
 	`;
 
-	const StyledLink = styled(Link)`
+	const StyledLink = styled(NavLink)`
 		color: inherit;
 		display: inline-block;
 		text-decoration: none;
 		border-bottom: 3px solid rgb(227, 219, 169);
 		font-size: 14px;
 		margin-top: 10px;
+		margin-right: 10px;
 		padding: 10px;
 		width: 100px;
 		border-radius: 5px;
@@ -64,6 +67,10 @@ export default function CharacterCard(props) {
 		transition: all 2s;
 
 		&:hover {
+			background: rgb(227, 219, 169);
+		}
+
+		&[aria-current] {
 			background: rgb(227, 219, 169);
 		}
 	`;
@@ -97,13 +104,21 @@ export default function CharacterCard(props) {
 						<StyledLink to={`/list/${character.id}/location`}>
 							Location Details
 						</StyledLink>
+						<StyledLink to={`/list/${character.id}/episodes`}>Episodes</StyledLink>
 					</Li>
 				</Ul>
 
 				<Route
 					path="/list/:id/location"
+					exact
 					render={props => {
 						return <LocationsList character={character} {...props} />;
+					}}
+				/>
+				<Route
+					path="/list/:id/episodes"
+					render={props => {
+						return <EpisodesList episode={character.episode} {...props} />;
 					}}
 				/>
 			</Wrapper>

@@ -53,7 +53,7 @@ export default function CharacterList() {
 
 		getCharacter();
 	}, []);
-	console.log(characters);
+
 	return (
 		<div>
 			<SearchForm
@@ -67,7 +67,7 @@ export default function CharacterList() {
 					<Ul>
 						{result.map(character => {
 							return (
-								<Li>
+								<Li key={character.id}>
 									<StyledLink to={`/list/${character.id}`}>{character.name}</StyledLink>
 								</Li>
 							);
@@ -77,7 +77,7 @@ export default function CharacterList() {
 					<Ul>
 						{characters.map(character => {
 							return (
-								<Li>
+								<Li key={character.id}>
 									<StyledLink to={`/list/${character.id}`}>{character.name}</StyledLink>
 								</Li>
 							);

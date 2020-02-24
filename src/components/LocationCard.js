@@ -15,7 +15,6 @@ export default function LocationCard({ name, type, dimension, residents }) {
 	const Label = styled.span`
 		font-weight: 700;
 	`;
-
 	return (
 		<Ul>
 			<Li>

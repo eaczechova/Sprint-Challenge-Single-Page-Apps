@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header.js';
 import WelcomePage from './components/WelcomePage.js';
 import CharacterList from './components/CharacterList.js';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
 	const Nav = styled.nav`
 		width: 100%;
 	`;
-	const StyledLink = styled(Link)`
+	const StyledLink = styled(NavLink)`
 		color: inherit;
 		display: inline-block;
 		text-decoration: none;
@@ -27,6 +27,10 @@ export default function App() {
 		&:hover {
 			background: rgb(155, 201, 228);
 		}
+
+		// &[aria-current] {
+		// 	background: rgb(155, 201, 228);
+		// }
 	`;
 	const Ul = styled.ul`
 		display: flex;
