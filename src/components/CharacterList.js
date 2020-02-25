@@ -1,16 +1,96 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import SearchForm from './SearchForm';
+import CharacterCard from './CharacterCard';
+import styled from 'styled-components';
+import { Route, Link } from 'react-router-dom';
 
 export default function CharacterList() {
-  // TODO: Add useState to track data from useEffect
+	const Ul = styled.ul`
+		list-style: none;
+	`;
 
-  useEffect(() => {
-    // TODO: Add API Request here - must run in `useEffect`
-    //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-  }, []);
+	const Li = styled.li`
+		padding: 10px;
+	`;
 
-  return (
-    <section className="character-list">
-      <h2>TODO: `array.map()` over your state here!</h2>
-    </section>
-  );
+	const Section = styled.section`
+		display: flex;
+	`;
+
+	const StyledLink = styled(Link)`
+		color: inherit;
+		display: inline-block;
+		text-decoration: none;
+		border: 2px solid rgb(227, 219, 169);
+		font-size: 14px;
+		margin-top: 10px;
+		padding: 10px;
+		width: 150px;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: all 1s;
+		text-align: center;
+
+		&:hover {
+			background: rgb(227, 219, 169);
+		}
+	`;
+
+	const [characters, setCharacters] = useState([]);
+	const [result, setResult] = useState([]);
+	useEffect(() => {
+		const getCharacter = () => {
+			axios
+				.get('https://rickandmortyapi.com/api/character/')
+				.then(response => {
+					setCharacters(response.data.results);
+				})
+				.catch(error => {
+					console.error('Server Error', error);
+				});
+		};
+
+		getCharacter();
+	}, []);
+
+	return (
+		<div>
+			<SearchForm
+				characters={characters}
+				setCharacters={setCharacters}
+				result={result}
+				setResult={setResult}
+			/>
+			<Section className="character-list">
+				{result.length > 0 ? (
+					<Ul>
+						{result.map(character => {
+							return (
+								<Li key={character.id}>
+									<StyledLink to={`/list/${character.id}`}>{character.name}</StyledLink>
+								</Li>
+							);
+						})}
+					</Ul>
+				) : (
+					<Ul>
+						{characters.map(character => {
+							return (
+								<Li key={character.id}>
+									<StyledLink to={`/list/${character.id}`}>{character.name}</StyledLink>
+								</Li>
+							);
+						})}
+					</Ul>
+				)}
+				<Route
+					path="/list/:id"
+					render={props => {
+						return <CharacterCard characters={characters} {...props} />;
+					}}
+				/>
+			</Section>
+		</div>
+	);
 }
